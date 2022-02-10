@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EF1111"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnUnJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:text="1.  JUGADOR" />
+
+    <Button
+        android:id="@+id/btnDosJugadores"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="100dp"
+        android:layout_toRightOf="@id/btnUnJugador"
+        android:text="2. JUGADORES" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnUnJugador"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="114dp"
+        android:text="PARTIDAS" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnDosJugadores"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="114dp"
+        android:layout_toRightOf="@id/button5"
+        android:text="RANKING" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnDosJugadores"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="115dp"
+        android:layout_toRightOf="@id/button6"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupDificultad"
+        android:layout_width="153dp"
+        android:layout_height="98dp"
+        android:layout_below="@id/btnUnJugador"
+        android:layout_marginLeft="100dp">
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:text="Facil" />
+
+        <RadioButton
+            android:id="@+id/rbDificil"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Dificil" />
+
+        <RadioButton
+            android:id="@+id/rbExtremo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Extremo" />
+    </RadioGroup>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="370dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/imageButton">
+
+        <TableLayout
+            android:layout_width="366dp"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/a1"
+                    android:layout_width="60dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/casilla" />
+
+                <ImageView
+                    android:id="@+id/a2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/casilla" />
+
+                <ImageView
+                    android:id="@+id/a3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/casilla" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/b1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/casilla" />
+
+                <ImageView
+                    android:id="@+id/b2"
+                    android:layout_width="120dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/casilla" />
+
+                <ImageView
+                    android:id="@+id/b3"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/casilla" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/c1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    app:srcCompat="@drawable/casilla" />
+
+                <ImageView
+                    android:id="@+id/c2"
+                    android:layout_width="120dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/casilla" />
+
+                <ImageView
+                    android:id="@+id/c3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:srcCompat="@drawable/casilla" />
+            </TableRow>
+
+        </TableLayout>
+
+    </androidx.gridlayout.widget.GridLayout>
+</RelativeLayout>
