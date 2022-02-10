@@ -7,13 +7,25 @@
     android:background="#EF1111"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="304dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Tres en Rayas" />
+
     <Button
         android:id="@+id/btnUnJugador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
-        android:text="1.  JUGADOR" />
+        android:text="1.  JUGADOR"
+        android:onClick="inicioJuego"/>
 
     <Button
         android:id="@+id/btnDosJugadores"
@@ -22,7 +34,8 @@
         android:layout_marginLeft="14dp"
         android:layout_marginTop="100dp"
         android:layout_toRightOf="@id/btnUnJugador"
-        android:text="2. JUGADORES" />
+        android:text="2. JUGADORES"
+        android:onClick="inicioJuego"/>
 
     <Button
         android:id="@+id/button5"
@@ -100,7 +113,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
 
                 <ImageView
                     android:id="@+id/a2"
@@ -108,7 +122,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
 
                 <ImageView
                     android:id="@+id/a3"
@@ -116,7 +131,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
             </TableRow>
 
             <TableRow
@@ -129,7 +145,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
 
                 <ImageView
                     android:id="@+id/b2"
@@ -137,7 +154,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
 
                 <ImageView
                     android:id="@+id/b3"
@@ -145,7 +163,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
             </TableRow>
 
             <TableRow
@@ -158,7 +177,8 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
 
                 <ImageView
                     android:id="@+id/c2"
@@ -166,7 +186,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
 
                 <ImageView
                     android:id="@+id/c3"
@@ -175,7 +196,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    app:srcCompat="@drawable/casilla" />
+                    app:srcCompat="@drawable/casilla"
+                    android:onClick="toqueCasilla"/>
             </TableRow>
 
         </TableLayout>
