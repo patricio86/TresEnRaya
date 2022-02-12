@@ -2,4 +2,7 @@
 <resources>
     <string name="app_name">TresEnRayas</string>
     <string name="Titulo">title</string>
+    <string name="Jugador">player</string>
+    <string name="Jugadores">players</string>
+    <string name="Partida">game</string>
 </resources>

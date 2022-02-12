@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
-        android:text="1.  JUGADOR"
+        android:freezesText="true"
         android:onClick="inicioJuego"
-        android:freezesText="true"/>
+        android:text="@string/Jugador" />
 
     <Button
         android:id="@+id/btnDosJugadores"
@@ -33,9 +33,9 @@
         android:layout_marginLeft="14dp"
         android:layout_marginTop="100dp"
         android:layout_toRightOf="@id/btnUnJugador"
-        android:text="2. JUGADORES"
+        android:freezesText="true"
         android:onClick="inicioJuego"
-        android:freezesText="true"/>
+        android:text="@string/Jugadores" />
 
     <Button
         android:id="@+id/lpartidas"
@@ -44,9 +44,9 @@
         android:layout_below="@id/btnUnJugador"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="114dp"
-        android:text="PARTIDAS"
+        android:freezesText="true"
         android:onClick="botonpartidas"
-        android:freezesText="true"/>
+        android:text="@string/Partida" />
 
 
     <Button

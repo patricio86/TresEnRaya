@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TresEnRayas</string>
     <string name="Titulo">Tres en Rayas</string>
+    <string name="Jugador">Jugador</string>
+    <string name="Jugadores">" Jugadores"</string>
+    <string name="Partida">Partida</string>
 </resources>
