@@ -7,16 +7,14 @@
     android:background="#EF1111"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:layout_width="304dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="Tres en Rayas" />
+        layout="@layout/toolbar"
+        android:layout_width="326dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnUnJugador"
@@ -25,7 +23,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
         android:text="1.  JUGADOR"
-        android:onClick="inicioJuego"/>
+        android:onClick="inicioJuego"
+        android:freezesText="true"/>
 
     <Button
         android:id="@+id/btnDosJugadores"
@@ -35,68 +34,82 @@
         android:layout_marginTop="100dp"
         android:layout_toRightOf="@id/btnUnJugador"
         android:text="2. JUGADORES"
-        android:onClick="inicioJuego"/>
+        android:onClick="inicioJuego"
+        android:freezesText="true"/>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/lpartidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnUnJugador"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="114dp"
-        android:text="PARTIDAS" />
+        android:text="PARTIDAS"
+        android:onClick="botonpartidas"
+        android:freezesText="true"/>
+
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/lranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnDosJugadores"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="114dp"
-        android:layout_toRightOf="@id/button5"
-        android:text="RANKING" />
+        android:layout_toRightOf="@id/lpartidas"
+        android:text="RANKING"
+        android:onClick="botonranking"
+        android:freezesText="true"/>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/activar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnDosJugadores"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="115dp"
-        android:layout_toRightOf="@id/button6"
-        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+        android:layout_toRightOf="@id/lranking"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
+        android:onClick="reproducirsonidojuego"
+        android:freezesText="true"/>
+
+
 
     <RadioGroup
         android:id="@+id/radioGroupDificultad"
         android:layout_width="153dp"
         android:layout_height="98dp"
         android:layout_below="@id/btnUnJugador"
-        android:layout_marginLeft="100dp">
+        android:layout_marginLeft="100dp"
+        android:freezesText="true">
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:text="Facil" />
+            android:text="Facil"
+            android:freezesText="true"/>
 
         <RadioButton
             android:id="@+id/rbDificil"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Dificil" />
+            android:text="Dificil"
+            android:freezesText="true"/>
 
         <RadioButton
             android:id="@+id/rbExtremo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Extremo" />
+            android:text="Extremo"
+            android:freezesText="true"/>
     </RadioGroup>
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="370dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/imageButton">
+        android:layout_toRightOf="@id/activar">
 
         <TableLayout
             android:layout_width="366dp"
@@ -114,7 +127,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
 
                 <ImageView
                     android:id="@+id/a2"
@@ -123,7 +137,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
 
                 <ImageView
                     android:id="@+id/a3"
@@ -132,7 +147,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
             </TableRow>
 
             <TableRow
@@ -146,7 +162,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
 
                 <ImageView
                     android:id="@+id/b2"
@@ -155,7 +172,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
 
                 <ImageView
                     android:id="@+id/b3"
@@ -164,7 +182,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
             </TableRow>
 
             <TableRow
@@ -178,7 +197,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
 
                 <ImageView
                     android:id="@+id/c2"
@@ -187,7 +207,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
 
                 <ImageView
                     android:id="@+id/c3"
@@ -197,7 +218,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
                     app:srcCompat="@drawable/casilla"
-                    android:onClick="toqueCasilla"/>
+                    android:onClick="toqueCasilla"
+                    android:freezesText="true"/>
             </TableRow>
 
         </TableLayout>

@@ -2,18 +2,35 @@ package com.example.tresenrayas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+
+import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE_PERMISSIONS = 1000;
+    private final int REQUEST_CODE_PERMISIONS = 1000;
+    MediaPlayer mp, mp2;
+    int posicion;
+    private Toolbar toolbar;
 
     //botón que se ha pulsado (1 ó 2 jugadores)
     private int numJugadores;
@@ -21,12 +38,20 @@ public class MainActivity extends AppCompatActivity {
     private int[] casillas;
     //partida
     private Partida partida;
+    private ContentValues valuesp;
+    private int persona;
+    private ImageButton activarsonido, desactivarsonido;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        activarsonido = (ImageButton)findViewById(R.id.activar);
 
         //Guardamos cada una de las casillas en el array
         casillas=new int[9];
@@ -40,14 +65,77 @@ public class MainActivity extends AppCompatActivity {
         casillas[7]=R.id.c2;
         casillas[8]=R.id.c3;
 
+        ContentValues valuesp;
+
+
+
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.INTERNET,
+                            Manifest.permission.RECORD_AUDIO,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_PERMISIONS);
+        }
+
+
+
+        Log.i("ACTIVITY","metodo onCreate");
+
+
+
     }
     /***
      * Método asociado al evento onClick de los botones de 1 Jugador y 2 Jugadores
      * @param view
      */
+
+    public void reproducirsonidojuego(View view){
+
+        if(mp2 == null){
+            activarsonido.setImageResource(R.drawable.soundon);
+            mp2 = MediaPlayer.create(this, R.raw.juegodetronos);
+            mp2.start();
+            activarsonido.setImageResource(R.drawable.soundoff);
+        }else if(mp2 != null){
+            mp2.stop();
+            mp2.release();
+            mp2 = null;
+            activarsonido.setImageResource(R.drawable.soundon);
+        }
+    }
+
+    public void onDestroy(){
+        super.onDestroy();
+
+        if(mp2 != null){
+            mp2.stop();
+            mp2.release();
+        }
+    }
+
+    public void botonpartidas(View view) {
+        Intent partidas = new Intent(getApplicationContext(),ListarPartidas.class);
+        startActivity(partidas);
+    }
+
+    public void botonranking(View view) {
+        Intent ranking = new Intent(getApplicationContext(),ListarRanking.class);
+        startActivity(ranking);
+    }
+
     public void inicioJuego(View view) {
 
+
+
         ImageView imagen;
+
+        valuesp = new ContentValues();
 
         //reseteamos el tablero
         //recorremos cada una de los elementos del array y a todos le asignamos la imagen de la casilla en blanco
@@ -69,12 +157,19 @@ public class MainActivity extends AppCompatActivity {
         int idDif=rgDificultad.getCheckedRadioButtonId();
 
         int dificultad = 0;
+        int puntos = 0;
 
         if(idDif==R.id.rbDificil){
             dificultad=1;
+            valuesp.put("dificultad","dificil");
+
         }else if(idDif==R.id.rbExtremo){
             dificultad=2;
+            valuesp.put("dificultad","extremo");
+
         }
+
+
 
         //comenzamos la partida
         partida=new Partida(dificultad);
@@ -139,12 +234,28 @@ public class MainActivity extends AppCompatActivity {
             //volvemos a cambiar el turno
             resultadoJuego=partida.turnoJuego();
 
+            if(mp != null){
+                mp.stop();
+                mp.release();
+                mp = null;
+            }
+            if(mp == null){
+                mp = MediaPlayer.create(this, R.raw.sonidocasilla);
+                mp.start();
+            }
+
+
+
             //evaluamos si el juego ha finalizado
             if(resultadoJuego>0){ //o bien hay empate o bien alguien ha ganado
                 evaluarFinal(resultadoJuego);
+
             }
         }
 
+
+
+        
     }
 
     /**
@@ -153,15 +264,36 @@ public class MainActivity extends AppCompatActivity {
      */
     private void evaluarFinal(int resultadoJuego) {
 
+        AdminSQLiteOpenHelper helperBBDD = new AdminSQLiteOpenHelper(this);
+        SQLiteDatabase db = helperBBDD.getWritableDatabase();
+
+        valuesp = new ContentValues();
+        persona++;
         String mensaje;
+        String result = "";
 
         if (resultadoJuego==1){ //ha ganado el jugador 1
             mensaje="Jugador 1 ha ganado";
+            result = "usu" + persona;
+
         }else if (resultadoJuego==2){//ha ganado el jugador 2
             mensaje="Jugador 2 ha ganado";
+            result = "maquina";
+
         } else mensaje="Empate";
+            result = "Empate";
+
+
 
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
+
+        valuesp.put("nombre","usu" + persona);
+        valuesp.put("jugador2","maquina");
+        valuesp.put("resultado",result);
+
+        db.insert("ranking",null,valuesp);
+        db.close();
+
 
         //finalizamos el juego
         partida=null;
@@ -169,6 +301,17 @@ public class MainActivity extends AppCompatActivity {
         (findViewById(R.id.btnUnJugador)).setEnabled(true);
         (findViewById(R.id.btnDosJugadores)).setEnabled(true);
         (findViewById(R.id.radioGroupDificultad)).setAlpha(1); //lo hacemos transparente
+
+        if(mp != null){
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
+        if(mp == null){
+            mp = MediaPlayer.create(this, R.raw.ganador);
+            mp.start();
+        }
+
 
     }
 
@@ -188,6 +331,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuitem,menu);
@@ -197,14 +341,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.item1){
-            Intent siguientelistarpartidas = new Intent(getApplicationContext(),ListarPartidas.class);
-            startActivity(siguientelistarpartidas);
+            Intent partidas = new Intent(getApplicationContext(),ListarPartidas.class);
+            startActivity(partidas);
         }
         if(item.getItemId() == R.id.item2){
-            Intent siguientelistarranking = new Intent(getApplicationContext(),ListarRanking.class);
-            startActivity(siguientelistarranking);
+            Intent ranking = new Intent(getApplicationContext(),ListarRanking.class);
+            startActivity(ranking);
         }
-
+        if(item.getItemId() == R.id.item3){
+            Intent ranking = new Intent(getApplicationContext(),ModificarUsuarios.class);
+            startActivity(ranking);
+        }
         return super.onOptionsItemSelected(item);
     }
 

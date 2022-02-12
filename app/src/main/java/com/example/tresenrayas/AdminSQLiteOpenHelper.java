@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "BDJuego.db";
-    public static final String SQL_CREATE_ENTRIES_PARTIDAS = "CREATE TABLE IF NOT EXISTS partidas(_ID  integer PRIMARY KEY, nombre text, numpartidas integer, puntos integer);";
+    public static final String SQL_CREATE_ENTRIES_PARTIDAS = "CREATE TABLE IF NOT EXISTS usuarios(_ID  integer PRIMARY KEY, nombre text, numpartidas integer, puntos integer);";
     public static final String SQL_DELETE_ENTRIES_PARTIDAS = "DROP TABLE IF EXISTS partidas";
-    public static final String SQL_CREATE_ENTRIES_USUARIOS = "CREATE TABLE IF NOT EXISTS usuarios(_ID  integer PRIMARY KEY, nombre text, jugador2 text, dificultad text, resultado text);";
+    public static final String SQL_CREATE_ENTRIES_USUARIOS = "CREATE TABLE IF NOT EXISTS partidas(_ID  integer PRIMARY KEY, nombre text, jugador2 text, dificultad text, resultado text);";
     public static final String SQL_DELETE_ENTRIES_USUARIOS = "DROP TABLE IF EXISTS usuarios";
 
     public AdminSQLiteOpenHelper(@Nullable Context context) {
