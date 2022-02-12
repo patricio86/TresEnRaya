@@ -39,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
     //partida
     private Partida partida;
     private ContentValues valuesp;
-    private int persona;
+    private int persona = 0;
+    private String dificultad;
     private ImageButton activarsonido, desactivarsonido;
+    private Double puntos;
+    private String resultado;
 
 
     @Override
@@ -65,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
         casillas[7]=R.id.c2;
         casillas[8]=R.id.c3;
 
-        ContentValues valuesp;
-
-
+        ContentValues valuesp, valuespu;
 
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED ||
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView imagen;
 
-        valuesp = new ContentValues();
+
 
         //reseteamos el tablero
         //recorremos cada una de los elementos del array y a todos le asignamos la imagen de la casilla en blanco
@@ -157,15 +158,15 @@ public class MainActivity extends AppCompatActivity {
         int idDif=rgDificultad.getCheckedRadioButtonId();
 
         int dificultad = 0;
-        int puntos = 0;
+
 
         if(idDif==R.id.rbDificil){
             dificultad=1;
-            valuesp.put("dificultad","dificil");
+
 
         }else if(idDif==R.id.rbExtremo){
             dificultad=2;
-            valuesp.put("dificultad","extremo");
+
 
         }
 
@@ -268,32 +269,66 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = helperBBDD.getWritableDatabase();
 
         valuesp = new ContentValues();
-        persona++;
         String mensaje;
-        String result = "";
+        persona++;
+
+        RadioGroup rgDificultad=findViewById(R.id.radioGroupDificultad);
+        int idDif=rgDificultad.getCheckedRadioButtonId();
 
         if (resultadoJuego==1){ //ha ganado el jugador 1
             mensaje="Jugador 1 ha ganado";
-            result = "usu" + persona;
+            if(idDif==R.id.rbFacil) {
+                puntos=1.0;
+                dificultad = "facil";
+            }else if(idDif==R.id.rbDificil){
+                puntos=1.5;
+                dificultad = "dificil";
+            }else if(idDif==R.id.rbExtremo){
+                puntos=3.0;
+                dificultad = "extremo";
+            }
+
+            resultado = "usu" + persona;
 
         }else if (resultadoJuego==2){//ha ganado el jugador 2
             mensaje="Jugador 2 ha ganado";
-            result = "maquina";
+            if(idDif==R.id.rbFacil) {
+                puntos=0.5;
+                dificultad = "facil";
+            }else if(idDif==R.id.rbDificil){
+                puntos=1.0;
+                dificultad = "dificil";
+            }else if(idDif==R.id.rbExtremo) {
+                puntos=1.5;
+                dificultad = "extremo";
+            }
+            resultado = "maquina";
+        }else{
+            mensaje="Empate";
+            if(idDif==R.id.rbFacil) {
+                puntos=0.5;
+                dificultad = "facil";
+            }else if(idDif==R.id.rbDificil){
+                puntos=1.0;
+                dificultad = "dificil";
+            }else if(idDif==R.id.rbExtremo) {
+                puntos=1.5;
+                dificultad = "extremo";
+            }
+            resultado = "Empate";
+        }
 
-        } else mensaje="Empate";
-            result = "Empate";
+        valuesp.put("nombre","usu" + persona);
+        valuesp.put("jugador2","maquina");
+        valuesp.put("dificultad",dificultad);
+        valuesp.put("resultado",resultado);
+
+        db.insert("partidas",null,valuesp);
+        db.close();
 
 
 
         Toast.makeText(this,mensaje,Toast.LENGTH_SHORT).show();
-
-        valuesp.put("nombre","usu" + persona);
-        valuesp.put("jugador2","maquina");
-        valuesp.put("resultado",result);
-
-        db.insert("ranking",null,valuesp);
-        db.close();
-
 
         //finalizamos el juego
         partida=null;
@@ -301,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
         (findViewById(R.id.btnUnJugador)).setEnabled(true);
         (findViewById(R.id.btnDosJugadores)).setEnabled(true);
         (findViewById(R.id.radioGroupDificultad)).setAlpha(1); //lo hacemos transparente
+
 
         if(mp != null){
             mp.stop();

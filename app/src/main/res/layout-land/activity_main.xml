@@ -84,7 +84,7 @@
         android:freezesText="true">
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/rbFacil"
             android:layout_width="match_parent"
             android:layout_height="33dp"
             android:text="Facil"
